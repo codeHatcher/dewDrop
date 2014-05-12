@@ -3,7 +3,7 @@
 
   "name": "dewDrop",
   "description": "Trust Support Vouch for people in your social network.",
-  "version": "1.0",
+  "version": "0.0.2",
 
   "permissions": [
     "https://secure.flickr.com/",
