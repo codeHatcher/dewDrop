@@ -47,7 +47,8 @@
       "js": [
         "src/inject/inject.js",
         "js/jquery-1.11.0.min.js",
-        "js/jup.js"
+        "js/jup.js",
+        "js/underscore.js"
       ],
       "css" : [
       "src/inject/inject.css"
