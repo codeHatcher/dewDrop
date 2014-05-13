@@ -2,29 +2,23 @@
 //example of using a message handler from the inject scripts
 chrome.extension.onMessage.addListener(
   function(request, sender, sendResponse) {
-    if (request.eventt){
-      return sendResponse("we did it!");
+    if (request.event === "createMenu"){
+      dewDropBg.createMenu({});
+      return;
     } else {
       chrome.pageAction.show(sender.tab.id);
       sendResponse();
     }
-
   });
 
 
-//add context menus
-chrome.contextMenus.create({
-  "title": "Buzz This",
-  "contexts": ["page", "selection", "image", "link"],
-  "onclick" : function(){console.log('context menu clicked')}
-});
-
-var dewDrop = {
-  createMenu: function(){
-    chrome.contextMenus,create({
+//object to help us do things in the background page
+var dewDropBg = {
+  createMenu: function(options){
+    chrome.contextMenus.create({
       "title": "dewDrop",
       "contexts": ["link"],
-      "onclick": clickHandler
+      "onclick": function(){console.log('context menu clicked')}
     });
   }
 };
