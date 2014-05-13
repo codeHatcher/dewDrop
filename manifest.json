@@ -30,7 +30,7 @@
         "https://www.google.com/*"
       ],
       "css": [
-        "src/inject/inject.css"
+        "src/context/context.css"
       ]
     },
     {
@@ -38,7 +38,7 @@
         "https://www.google.com/*"
       ],
       "js": [
-        "src/inject/inject.js"
+        "src/context/context.js"
       ]
     }
   ]
