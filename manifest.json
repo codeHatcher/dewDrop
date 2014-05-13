@@ -2,16 +2,23 @@
   "manifest_version": 2,
 
   "name": "dewDrop",
-  "description": "Trust Support Vouch for people in your social network.",
-  "version": "0.0.2",
+  "description": "Trust, support, vouch for people in your social network.",
+  "version": "0.0.4",
 
   "permissions": [
+    "tabs",
     "https://secure.flickr.com/",
+    "https://www.google.com/",
     "https://www.facebook.com/*",
     "http://www.facebook.com/*"
   ],
-  "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup.html"
-  }
+  "page_action": {
+    "default_icon": {
+      "19":"icon19.png",
+      "38":"icon38.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "dewDrop"
+  },
+  "background": { "scripts" : ["background.js"]}
 }
