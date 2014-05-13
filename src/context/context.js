@@ -22,3 +22,7 @@ chrome.extension.sendMessage({}, function(response) {
   }
   }, 10);
 });
+
+$(document).ready(function(){
+  console.log("jquery document is ready");
+});
