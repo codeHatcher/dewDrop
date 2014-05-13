@@ -7,10 +7,8 @@
 
   "permissions": [
     "tabs",
-    "https://secure.flickr.com/",
-    "https://www.google.com/",
-    "https://www.facebook.com/*",
-    "http://www.facebook.com/*"
+    "http://*/*",
+    "https://*/*"
   ],
   "page_action": {
     "default_icon": {
