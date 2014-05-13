@@ -1,6 +1,6 @@
 
 var dewDrop = {
-  createMenu: function(){
+  createContexMenu: function(){
     //send message to background page for menu creation.
     chrome.extension.sendMessage({"event": "createMenu"}, function(response){
       console.log("creating menu " + response);
@@ -18,7 +18,7 @@ chrome.extension.sendMessage({}, function(response) {
     // This part of the script triggers when page is done loading
     console.log("Hello. This message was sent from scripts/inject.js");
     // ----------------------------------------------------------
-    dewDrop.createMenu();
+    dewDrop.createContexMenu();
   }
   }, 10);
 });
