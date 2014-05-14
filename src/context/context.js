@@ -5,6 +5,12 @@ var dewDrop = {
     chrome.extension.sendMessage({"event": "createMenu"}, function(response){
       console.log("creating menu " + response);
     });
+  },
+  templateHTML: function(){
+    chrome.extension.sendMessage({"event": "getTemplate"}, function(template){
+      console.log("getting template from background page");
+      return template;
+    });
   }
 };
 
@@ -19,7 +25,7 @@ chrome.extension.sendMessage({}, function(response) {
     console.log("Hello. This message was sent from scripts/inject.js");
     // ----------------------------------------------------------
     dewDrop.createContexMenu();
-    debugger;
+    dewDrop.templateHTML();
   }
   }, 10);
 });

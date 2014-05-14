@@ -5,6 +5,10 @@ chrome.extension.onMessage.addListener(
     if (request.event === "createMenu"){
       dewDropBg.createMenu({});
       return;
+    } else if ( request.event === "getTemplate"){
+      dewDropBg.templateHTML();
+      sendResponse(dewDropBg.templateHTML());
+      return;
     } else {
       chrome.pageAction.show(sender.tab.id);
       sendResponse();
@@ -21,9 +25,9 @@ var dewDropBg = {
       "onclick": function(){console.log('context menu clicked')}
     });
   },
-  template: function(){
+  templateHTML: function(){
     //get the template from the html page
-
+    return $('#popupTmpl').html();
   }
 };
 
