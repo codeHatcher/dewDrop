@@ -38,8 +38,8 @@
         "https://www.google.com/*"
       ],
       "js": [
-        "src/context/context.js",
-        "js/jquery/jquery.min.js"
+        "js/jquery/jquery.js",
+        "src/context/context.js"
       ]
     }
   ]
