@@ -19,10 +19,8 @@ chrome.extension.sendMessage({}, function(response) {
     console.log("Hello. This message was sent from scripts/inject.js");
     // ----------------------------------------------------------
     dewDrop.createContexMenu();
+    debugger;
   }
   }, 10);
 });
 
-$(document).ready(function(){
-  console.log("jquery document is ready");
-});
