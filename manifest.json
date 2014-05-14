@@ -39,6 +39,7 @@
       ],
       "js": [
         "js/jquery/jquery.js",
+        "js/underscore/underscore.js",
         "src/context/context.js"
       ]
     }
