@@ -29,7 +29,7 @@ var dewDrop = {
       if (request.event === "menuClicked"){
         //if we have a click from the context menu
         //get the associated facebook id of the clicked link
-        that.resolveId(request.context);
+        that.getUserDetails(request.context);
         //go ahead and trigger the dialog
         $(document).avgrund({
           width: 380,
@@ -40,9 +40,10 @@ var dewDrop = {
       }
     });
   },
-  resolveId: function(context){
+  getUserDetails: function(context){
     //function takes the clicked link and makes it into a facebook id
-
+    var facebookId = $('a[href="' +context.linkUrl+'"]').attr('data-hovercard').match(new RegExp("\[0-9]+"));
+    return facebookId;
 
   }
 };
