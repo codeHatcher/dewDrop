@@ -5,7 +5,7 @@ chrome.extension.onMessage.addListener(
     if (request.event === "createMenu"){
       dewDropBg.createMenu({});
       return;
-    } else if ( request.event === "getTemplate"){
+    } else if ( request.event === "getTemplateHTML"){
       dewDropBg.templateHTML();
       sendResponse(dewDropBg.templateHTML());
       return;
