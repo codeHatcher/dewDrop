@@ -6,10 +6,11 @@ var dewDrop = {
       console.log("creating menu " + response);
     });
   },
-  template: function(){
-    chrome.extension.sendMessage({"event": "getTemplate"}, function(template){
+  template: function(cb){
+    chrome.extension.sendMessage({"event": "getTemplateHTML"}, function(template){
       console.log("getting template from background page");
-      return template;
+      //once the template has loaded go ahead and run the callback with the template as the first arg
+      return cb(template);
     });
   }
 };
@@ -25,8 +26,10 @@ chrome.extension.sendMessage({}, function(response) {
     console.log("Hello. This message was sent from scripts/inject.js");
     // ----------------------------------------------------------
     dewDrop.createContexMenu();
-    dewDrop.template();
-    $('body').append("TEST");
+    dewDrop.template(function(template){
+      $('body').append(template);
+    });
+
   }
   }, 10);
 });
