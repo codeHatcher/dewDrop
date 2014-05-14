@@ -30,7 +30,8 @@
         "https://www.google.com/*"
       ],
       "css": [
-        "src/context/context.css"
+        "src/context/context.css",
+        "js/jquery.avgrund/style/avgrund.css"
       ]
     },
     {
@@ -40,6 +41,7 @@
       "js": [
         "js/jquery/jquery.js",
         "js/underscore/underscore.js",
+        "js/jquery.avgrund/jquery.avgrund.js",
         "src/context/context.js"
       ]
     }

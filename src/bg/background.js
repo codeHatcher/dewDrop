@@ -30,4 +30,3 @@ var dewDropBg = {
     return $('#popupTmpl').html();
   }
 };
-
