@@ -22,7 +22,13 @@ var dewDropBg = {
     chrome.contextMenus.create({
       "title": "dewDrop",
       "contexts": ["link"],
-      "onclick": function(){console.log('context menu clicked')}
+      "onclick": function(context, tab){
+        console.log('context menu clicked' + context + tab);
+        //send message back to the context script to let it know the context menu has been clicked
+        chrome.tabs.sendMessage(tab.id, {"event": "menuClicked"}, function(response){
+          //once the message is sent, we really don't need to do anything
+        });
+      }
     });
   },
   templateHTML: function(){

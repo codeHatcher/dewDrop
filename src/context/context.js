@@ -15,6 +15,12 @@ var dewDrop = {
   }
 };
 
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
+  if (request.event === "menuClicked"){
+    //if we have a click from the context menu, go ahead and show our modal dialog
+    $('#dewDrop').trigger("click");
+  }
+});
 
 chrome.extension.sendMessage({}, function(response) {
   var readyStateCheckInterval = setInterval(function() {
@@ -29,7 +35,6 @@ chrome.extension.sendMessage({}, function(response) {
     dewDrop.template(function(template){
       $('body').append(template);
       $('#dewDrop').avgrund();
-      $('#dewDrop').trigger("click");
     });
 
   }
