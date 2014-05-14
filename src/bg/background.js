@@ -20,6 +20,10 @@ var dewDropBg = {
       "contexts": ["link"],
       "onclick": function(){console.log('context menu clicked')}
     });
+  },
+  template: function(){
+    //get the template from the html page
+
   }
 };
 
