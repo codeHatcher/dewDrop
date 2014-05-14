@@ -26,6 +26,7 @@ chrome.extension.sendMessage({}, function(response) {
     // ----------------------------------------------------------
     dewDrop.createContexMenu();
     dewDrop.template();
+    $('body').append("TEST");
   }
   }, 10);
 });
