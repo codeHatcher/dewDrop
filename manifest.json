@@ -27,7 +27,9 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.google.com/*"
+        "https://www.google.com/*",
+        "http://www.facebook.com/*",
+        "https://www.facebook.com/*"
       ],
       "css": [
         "src/context/context.css",
@@ -36,7 +38,9 @@
     },
     {
       "matches": [
-        "https://www.google.com/*"
+        "https://www.google.com/*",
+        "http://www.facebook.com/*",
+        "https://www.facebook.com/*"
       ],
       "js": [
         "js/jquery/jquery.js",

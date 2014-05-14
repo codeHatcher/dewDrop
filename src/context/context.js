@@ -28,6 +28,8 @@ var dewDrop = {
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
       if (request.event === "menuClicked"){
         //if we have a click from the context menu
+        //get the associated facebook id of the clicked link
+        that.resolveId(request.context);
         //go ahead and trigger the dialog
         $(document).avgrund({
           width: 380,
@@ -37,6 +39,11 @@ var dewDrop = {
         });
       }
     });
+  },
+  resolveId: function(context){
+    //function takes the clicked link and makes it into a facebook id
+
+
   }
 };
 

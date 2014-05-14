@@ -25,7 +25,7 @@ var dewDropBg = {
       "onclick": function(context, tab){
         console.log('context menu clicked' + context + tab);
         //send message back to the context script to let it know the context menu has been clicked
-        chrome.tabs.sendMessage(tab.id, {"event": "menuClicked"}, function(response){
+        chrome.tabs.sendMessage(tab.id, {"event": "menuClicked", "context": context}, function(response){
           //once the message is sent, we really don't need to do anything
         });
       }
