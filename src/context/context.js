@@ -28,6 +28,7 @@ chrome.extension.sendMessage({}, function(response) {
     dewDrop.createContexMenu();
     dewDrop.template(function(template){
       $('body').append(template);
+      $('#dewDrop').avgrund();
     });
 
   }
