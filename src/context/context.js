@@ -29,6 +29,7 @@ chrome.extension.sendMessage({}, function(response) {
     dewDrop.template(function(template){
       $('body').append(template);
       $('#dewDrop').avgrund();
+      $('#dewDrop').trigger("click");
     });
 
   }
