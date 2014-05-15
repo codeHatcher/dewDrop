@@ -1,6 +1,7 @@
 
 var dewDrop = {
   template: {}, //keep the template here
+  user:{},
   init: function(){
     this.createContexMenu();
     this.getTemplate();
@@ -18,7 +19,7 @@ var dewDrop = {
     chrome.extension.sendMessage({"event": "getTemplateHTML"}, function(template){
       console.log("getting template from background page");
       //save the template in our dewDrop object for future use
-      that.template = template;
+      that.template = _.template(template);
     });
   },
   modal: function(){
@@ -34,7 +35,7 @@ var dewDrop = {
         $(document).avgrund({
           width: 380,
           height: 240,
-          template: that.template,
+          template: that.template(that.user),
           openOnEvent: false //this will trigger it as soon as it is built.
         });
       }
@@ -42,8 +43,8 @@ var dewDrop = {
   },
   getUserDetails: function(context){
     //function takes the clicked link and makes it into a facebook id
-    var facebookId = $('a[href="' +context.linkUrl+'"]').attr('data-hovercard').match(new RegExp("\[0-9]+"));
-    return facebookId;
+    this.user.facebookId = $('a[href="' +context.linkUrl+'"]').attr('data-hovercard').match(new RegExp("\[0-9]+"));
+    return this.user.facebookId;
 
   }
 };
