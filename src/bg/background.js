@@ -19,6 +19,7 @@ chrome.extension.onMessage.addListener(
 //object to help us do things in the background page
 var dewDropBg = {
   createMenu: function(options){
+    console.log('creating context menu');
     chrome.contextMenus.create({
       "title": "dewDrop",
       "contexts": ["link"],

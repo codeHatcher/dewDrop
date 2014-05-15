@@ -1,8 +1,9 @@
 
 var dewDrop = {
   template: {}, //keep the template here
-  user:{},
+  user:{supports:[], supporters:[]},
   init: function(){
+    this.getUserDetails();
     this.createContexMenu();
     this.getTemplate();
     this.modal();
@@ -30,7 +31,10 @@ var dewDrop = {
       if (request.event === "menuClicked"){
         //if we have a click from the context menu
         //get the associated facebook id of the clicked link
-        that.getUserDetails(request.context);
+        that.getUserId(request.context);
+        that.trustUser(that.user.facebookId);
+        //save the id as trusted (testing)
+        that.saveUserDetails();
         //go ahead and trigger the dialog
         $(document).avgrund({
           width: 380,
@@ -41,11 +45,33 @@ var dewDrop = {
       }
     });
   },
-  getUserDetails: function(context){
+  getUserId: function(context){
     //function takes the clicked link and makes it into a facebook id
     this.user.facebookId = $('a[href="' +context.linkUrl+'"]').attr('data-hovercard').match(new RegExp("\[0-9]+"));
     return this.user.facebookId;
-
+  },
+  getMyId: function(){
+    //function gets the id of the logged in user
+    return this.user.ownId;
+  },
+  trustUser: function(trustedUser){
+    this.user.supports.push(trustedUser);
+  },
+  saveUserDetails: function(){
+    //save the user details to the server
+    //save the user details in local storage
+    this.user.supports.push(this.user.facebookId);
+    localStorage.user = JSON.stringify(this.user);
+  },
+  getUserDetails: function(){
+    //get the user details from the server of everyone you trust from the server
+    //mockup the data for now
+    //try to get data from remote server
+    //TODO, insert api hook here
+    if (localStorage.user){
+      this.user = JSON.parse(localStorage.user);
+    }
+    //if you get data from remote, go ahead and set that to our user variable
   }
 };
 
