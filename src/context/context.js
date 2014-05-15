@@ -3,6 +3,8 @@ var dewDrop = {
   template: {}, //keep the template here
   user:{supports:[], supporters:[]},
   init: function(){
+    //bind functions to keep proper context
+    this.trustUser = _.bind(this.trustUser, this);
     this.getUserDetails();
     this.createContexMenu();
     this.getTemplate();
@@ -59,10 +61,9 @@ var dewDrop = {
   },
   trustUser: function(event){
     debugger;
-    var that = event.data;
-    that.user.supports.push(that.user.facebookId);
+    this.user.supports.push(this.user.facebookId);
     //save the id as trusted (testing)
-    that.saveUserDetails();
+    this.saveUserDetails();
   },
   saveUserDetails: function(){
     //save the user details to the server
