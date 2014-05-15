@@ -6,7 +6,13 @@ var dewDrop = {
     this.getUserDetails();
     this.createContexMenu();
     this.getTemplate();
+    this.listenEvents();
     this.modal();
+  },
+  listenEvents: function(){
+    //listen to future button clicks even though they haven't been inserted into the DOM yet
+    $(document).on('click', '#supportUser', this, this.trustUser);
+
   },
   createContexMenu: function(){
     //send message to background page for menu creation.
@@ -32,9 +38,6 @@ var dewDrop = {
         //if we have a click from the context menu
         //get the associated facebook id of the clicked link
         that.getUserId(request.context);
-        that.trustUser(that.user.facebookId);
-        //save the id as trusted (testing)
-        that.saveUserDetails();
         //go ahead and trigger the dialog
         $(document).avgrund({
           width: 380,
@@ -54,13 +57,16 @@ var dewDrop = {
     //function gets the id of the logged in user
     return this.user.ownId;
   },
-  trustUser: function(trustedUser){
-    this.user.supports.push(trustedUser);
+  trustUser: function(event){
+    debugger;
+    var that = event.data;
+    that.user.supports.push(that.user.facebookId);
+    //save the id as trusted (testing)
+    that.saveUserDetails();
   },
   saveUserDetails: function(){
     //save the user details to the server
     //save the user details in local storage
-    this.user.supports.push(this.user.facebookId);
     localStorage.user = JSON.stringify(this.user);
   },
   getUserDetails: function(){
