@@ -36,7 +36,7 @@ var dewDrop = {
     //add element that contains the information for our modal to the body
     $('body').append(this.template(this.user));
     //if trust the user, remove the trust button, otherwise remove the other button
-    if (this.checkTrust(this.user.facebookId)){
+    if (this.checkTrust(this.user.personInQuestion)){
       $('#dewDrop').find('#supportUser').remove();
     } else {
       $('#dewDrop').find('#unsupportUser').remove();
@@ -66,25 +66,25 @@ var dewDrop = {
   },
   getUserId: function(context){
     //function takes the clicked link and makes it into a facebook id
-    this.user.facebookId = $('a[href="' +context.linkUrl+'"]').attr('data-hovercard').match(new RegExp("\[0-9]+")).toString();
-    return this.user.facebookId;
+    this.user.personInQuestion = $('a[href="' +context.linkUrl+'"]').attr('data-hovercard').match(new RegExp("\[0-9]+")).toString();
+    return this.user.personInQuestion;
   },
   getMyId: function(){
     //function gets the id of the logged in user
     return this.user.ownId;
   },
   trustUser: function(event){
-    this.user.supports = _.union(this.user.supports, this.user.facebookId);
+    this.user.supports = _.union(this.user.supports, this.user.personInQuestion);
     //save the id as trusted (testing)
     this.saveUserDetails();
   },
   distrustUser: function(event){
-    this.user.supports = _.without(this.user.supports, this.user.facebookId);
+    this.user.supports = _.without(this.user.supports, this.user.personInQuestion);
     this.saveUserDetails();
   },
   checkTrust: function(userId){
     //go through our list of users we support and see if there is a match
-    return _.contains(this.user.supports, this.user.facebookId);
+    return _.contains(this.user.supports, this.user.personInQuestion);
   },
   saveUserDetails: function(){
     //save the user details to the server
