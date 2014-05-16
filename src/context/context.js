@@ -5,6 +5,7 @@ var dewDrop = {
   init: function(){
     //bind functions to keep proper context
     this.trustUser = _.bind(this.trustUser, this);
+    this.distrustUser = _.bind(this.distrustUser, this);
     this.getUserDetails();
     this.createContexMenu();
     this.getTemplate();
@@ -13,8 +14,8 @@ var dewDrop = {
   },
   listenEvents: function(){
     //listen to future button clicks even though they haven't been inserted into the DOM yet
+    $(document).on('click', '#unsupportUser', this, this.distrustUser);
     $(document).on('click', '#supportUser', this, this.trustUser);
-
   },
   createContexMenu: function(){
     //send message to background page for menu creation.
@@ -68,12 +69,12 @@ var dewDrop = {
     return this.user.ownId;
   },
   trustUser: function(event){
-    this.user.supports.push(this.user.facebookId);
+    this.user.supports = _.union(this.user.supports, this.user.facebookId);
     //save the id as trusted (testing)
     this.saveUserDetails();
   },
   distrustUser: function(event){
-    _.without(this.user.supports, this.user.facebookId);
+    this.user.supports = _.without(this.user.supports, this.user.facebookId);
     this.saveUserDetails();
   },
   checkTrust: function(userId){
