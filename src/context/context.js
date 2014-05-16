@@ -72,6 +72,10 @@ var dewDrop = {
     //save the id as trusted (testing)
     this.saveUserDetails();
   },
+  distrustUser: function(event){
+    _.without(this.user.supports, this.user.facebookId);
+    this.saveUserDetails();
+  },
   checkTrust: function(userId){
     //go through our list of users we support and see if there is a match
     return _.contains(this.user.supports, this.user.facebookId);
