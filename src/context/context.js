@@ -40,15 +40,21 @@ var dewDrop = {
         //if we have a click from the context menu
         //get the associated facebook id of the clicked link
         that.getUserId(request.context);
+        //add element that contains the information for our modal to the body
+        $('body').append(that.template(that.user));
+        //if trust the user, remove the trust button, otherwise remove the other button
+        if (that.checkTrust(that.user.facebookId)){
+          $('#dewDrop').find('#supportUser').remove();
+        } else {
+          $('#dewDrop').find('#unsupportUser').remove();
+        }
         //go ahead and trigger the dialog
         $(document).avgrund({
           width: 380,
           height: 240,
-          template: that.template(that.user),
-          onLoad: function(){debugger;},
+          template: $('#dewDrop'),
           openOnEvent: false //this will trigger it as soon as it is built.
         });
-        debugger;
       }
     });
   },
