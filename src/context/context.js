@@ -60,7 +60,7 @@ var dewDrop = {
   },
   getUserId: function(context){
     //function takes the clicked link and makes it into a facebook id
-    this.user.facebookId = $('a[href="' +context.linkUrl+'"]').attr('data-hovercard').match(new RegExp("\[0-9]+"));
+    this.user.facebookId = $('a[href="' +context.linkUrl+'"]').attr('data-hovercard').match(new RegExp("\[0-9]+")).toString();
     return this.user.facebookId;
   },
   getMyId: function(){
