@@ -45,8 +45,10 @@ var dewDrop = {
           width: 380,
           height: 240,
           template: that.template(that.user),
+          onLoad: function(){debugger;},
           openOnEvent: false //this will trigger it as soon as it is built.
         });
+        debugger;
       }
     });
   },
@@ -60,10 +62,13 @@ var dewDrop = {
     return this.user.ownId;
   },
   trustUser: function(event){
-    debugger;
     this.user.supports.push(this.user.facebookId);
     //save the id as trusted (testing)
     this.saveUserDetails();
+  },
+  checkTrust: function(userId){
+    //go through our list of users we support and see if there is a match
+    return _.contains(this.user.supports, this.user.facebookId);
   },
   saveUserDetails: function(){
     //save the user details to the server
