@@ -10,12 +10,44 @@ var dewDrop = {
     this.createContexMenu();
     this.getTemplate();
     this.listenEvents();
-    this.modal();
+    //this.modal();
   },
   listenEvents: function(){
+    var that = this;
     //listen to future button clicks even though they haven't been inserted into the DOM yet
     $(document).on('click', '#unsupportUser', this, this.distrustUser);
     $(document).on('click', '#supportUser', this, this.trustUser);
+    //listen for events from background.js
+    chrome.runtime.onMessage.addListener(function(request, sender, sendReponse){
+      if (request.event === "menuClicked"){
+        //if the event triggered was the menu click, do the following
+        that.render(request.context); //pass in context/info about the menu click
+      }
+    });
+  },
+  menuClicked: function(context){
+    //once the menu is clicked...
+
+    //render our interface to the user
+    this.render();
+  },
+  render: function(context){
+    this.getUserId(context);
+    //add element that contains the information for our modal to the body
+    $('body').append(this.template(this.user));
+    //if trust the user, remove the trust button, otherwise remove the other button
+    if (this.checkTrust(this.user.facebookId)){
+      $('#dewDrop').find('#supportUser').remove();
+    } else {
+      $('#dewDrop').find('#unsupportUser').remove();
+    }
+    //go ahead and trigger the dialog
+    $(document).avgrund({
+      width: 380,
+      height: 240,
+      template: $('#dewDrop'),
+      openOnEvent: false //this will trigger it as soon as it is built.
+    });
   },
   createContexMenu: function(){
     //send message to background page for menu creation.
@@ -30,33 +62,6 @@ var dewDrop = {
       console.log("getting template from background page");
       //save the template in our dewDrop object for future use
       that.template = _.template(template);
-    });
-  },
-  modal: function(){
-    //keep context
-    var that = this;
-    //setup a listener on a hidden element
-    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
-      if (request.event === "menuClicked"){
-        //if we have a click from the context menu
-        //get the associated facebook id of the clicked link
-        that.getUserId(request.context);
-        //add element that contains the information for our modal to the body
-        $('body').append(that.template(that.user));
-        //if trust the user, remove the trust button, otherwise remove the other button
-        if (that.checkTrust(that.user.facebookId)){
-          $('#dewDrop').find('#supportUser').remove();
-        } else {
-          $('#dewDrop').find('#unsupportUser').remove();
-        }
-        //go ahead and trigger the dialog
-        $(document).avgrund({
-          width: 380,
-          height: 240,
-          template: $('#dewDrop'),
-          openOnEvent: false //this will trigger it as soon as it is built.
-        });
-      }
     });
   },
   getUserId: function(context){
