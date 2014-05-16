@@ -69,6 +69,10 @@ var dewDrop = {
     this.user.personInQuestion = $('a[href="' +context.linkUrl+'"]').attr('data-hovercard').match(new RegExp("\[0-9]+")).toString();
     return this.user.personInQuestion;
   },
+  getUserName: function(context){
+    //function takes the context of the link the menu item was clicked on and returns name
+    return context.selectionText;
+  },
   getMyId: function(){
     //function gets the id of the logged in user
     return this.user.ownId;
