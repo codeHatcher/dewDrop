@@ -32,7 +32,10 @@ var dewDrop = {
     this.render();
   },
   render: function(context){
+    //get the userid data
     this.getUserId(context);
+    //get the name data
+    this.getName(context);
     //add element that contains the information for our modal to the body
     $('body').append(this.template(this.user.personInQuestion));
     //if trust the user, remove the trust button, otherwise remove the other button
@@ -69,8 +72,9 @@ var dewDrop = {
     this.user.personInQuestion.facebookId = $('a[href="' +context.linkUrl+'"]').attr('data-hovercard').match(new RegExp("\[0-9]+")).toString();
     return this.user.personInQuestion.facebookId;
   },
-  getUserName: function(context){
+  getName: function(context){
     //function takes the context of the link the menu item was clicked on and returns name
+    this.user.personInQuestion.name = context.selectionText;
     return context.selectionText;
   },
   getMyId: function(){
