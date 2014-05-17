@@ -33,7 +33,9 @@
       ],
       "css": [
         "src/context/context.css",
-        "js/jquery.avgrund/style/avgrund.css"
+        "js/jquery.avgrund/style/avgrund.css",
+        "js/bootstrap/css/bootstrap.css",
+        "js/bootstrap/css/bootstrap-theme.css"
       ]
     },
     {
