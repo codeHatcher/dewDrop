@@ -40,9 +40,11 @@ var dewDrop = {
     $('body').append(this.template(this.user.personInQuestion));
     //if trust the user, remove the trust button, otherwise remove the other button
     if (this.checkTrust(this.user.personInQuestion.facebookId)){
-      $('#dewDrop').find('#supportUser').remove();
+      $('#dewDrop').find('#supportUser').hide();
+      $('#dewDrop').find('#unsupportUser').show();
     } else {
-      $('#dewDrop').find('#unsupportUser').remove();
+      $('#dewDrop').find('#unsupportUser').hide();
+      $('#dewDrop').find('#supportUser').show();
     }
     //go ahead and trigger the dialog
     $("#dewDrop").modal({
