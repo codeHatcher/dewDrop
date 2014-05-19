@@ -2,10 +2,19 @@
 <html>
 <head>
   <script type="text/template" id="popupTmpl">
-    <div id="dewDrop">How do you feel about <%= name %> aka FBuser: <%= facebookId %>
-      <button id='supportUser' class="btn btn-success">I Trust Them</button>
-      <button id='unsupportUser' class="btn btn-danger">I don't trust them</button>
+    <div id="dewDrop">
+      <div class="center-block">
+        <h1 class="text-center">Do you trust <%= name %>
+        </h1>
 
+        <h1 class="text-center">
+          <small>aka fb: <%= facebookId %></small>
+        </h1>
+        <p class="text-center">
+          <button id='supportUser' class="btn btn-lg btn-success">I Trust Them</button>
+          <button id='unsupportUser' class="btn btn-lg btn-danger">I don't trust them</button>
+        </p>
+      </div>
     </div>
   </script>
   <script type="text/javascript" src="../../js/jquery/jquery.min.js"></script>
