@@ -33,7 +33,6 @@
       ],
       "css": [
         "src/context/context.css",
-        "js/jquery.avgrund/style/avgrund.css",
         "js/bootstrap/css/bootstrap.css",
         "js/bootstrap/css/bootstrap-theme.css"
       ]
@@ -46,8 +45,8 @@
       ],
       "js": [
         "js/jquery/jquery.js",
+        "js/bootstrap/js/bootstrap.js",
         "js/underscore/underscore.js",
-        "js/jquery.avgrund/jquery.avgrund.js",
         "src/context/context.js"
       ]
     }

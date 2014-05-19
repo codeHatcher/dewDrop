@@ -45,11 +45,7 @@ var dewDrop = {
       $('#dewDrop').find('#unsupportUser').remove();
     }
     //go ahead and trigger the dialog
-    $(document).avgrund({
-      width: 380,
-      height: 240,
-      template: $('#dewDrop'),
-      openOnEvent: false //this will trigger it as soon as it is built.
+    $("#dewDrop").modal({
     });
   },
   createContexMenu: function(){
