@@ -17,6 +17,8 @@ var dewDrop = {
     //listen to future button clicks even though they haven't been inserted into the DOM yet
     $(document).on('click', '#unsupportUser', this, this.distrustUser);
     $(document).on('click', '#supportUser', this, this.trustUser);
+    //unrender with modal is closed
+    $(document).on('click', '#closeModal', this, this.unrender);
     //listen for events from background.js
     chrome.runtime.onMessage.addListener(function(request, sender, sendReponse){
       if (request.event === "menuClicked"){
@@ -49,6 +51,10 @@ var dewDrop = {
     //go ahead and trigger the dialog
     $("#dewDrop").modal({
     });
+  },
+  unrender: function(){
+    //call this when we are done with our modal
+    $('#dewDrop').remove();
   },
   createContexMenu: function(){
     //send message to background page for menu creation.
