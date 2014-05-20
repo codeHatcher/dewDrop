@@ -1,21 +1,3 @@
-
-//example of using a message handler from the inject scripts
-chrome.extension.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    if (request.event === "createMenu"){
-      dewDropBg.createMenu({});
-      return;
-    } else if ( request.event === "getTemplateHTML"){
-      dewDropBg.templateHTML();
-      sendResponse(dewDropBg.templateHTML());
-      return;
-    } else {
-      chrome.pageAction.show(sender.tab.id);
-      sendResponse();
-    }
-  });
-
-
 //object to help us do things in the background page
 var dewDropBg = {
   createMenu: function(options){
@@ -35,5 +17,28 @@ var dewDropBg = {
   templateHTML: function(){
     //get the template from the html page
     return $('#popupTmpl').html();
+  },
+  listenContextMenu: function(request, sender, sendResponse){
+    if (request.event === "createMenu"){
+      dewDropBg.createMenu({});
+      //remove the listener because we only want one context menu
+      chrome.extension.onMessage.removeListener(dewDropBg.listenContextMenu);
+      return;
+    }
   }
 };
+//example of using a message handler from the inject scripts
+chrome.extension.onMessage.addListener(
+  function(request, sender, sendResponse) {
+   if ( request.event === "getTemplateHTML"){
+      dewDropBg.templateHTML();
+      sendResponse(dewDropBg.templateHTML());
+      return;
+    } else {
+      chrome.pageAction.show(sender.tab.id);
+      sendResponse();
+    }
+  });
+//separate event listener for context menu creation so that we can remove the listener later
+chrome.extension.onMessage.addListener(dewDropBg.listenContextMenu);
+
