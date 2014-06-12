@@ -111,6 +111,14 @@ var dewDrop = {
     //mockup the data for now
     //try to get data from remote server
     //TODO, insert api hook here
+    var jqxhr = $.getJSON("http://dewdrop.neyer.me/api/v1/statement/?format=json&author__name=21405334&author__network__name=facebook&content=trust&subject__network__name=facebook", function(){
+
+    })
+    .done(function(data){
+      data.objects.forEach(function(object, index, objects){dewDrop.user.supports.push(object.subject.name)});
+      dewDrop.user.supports = _.uniq(dewDrop.user.supports);
+
+    });
     if (localStorage.user){
       this.user = JSON.parse(localStorage.user);
     }
