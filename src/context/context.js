@@ -105,7 +105,6 @@ var dewDrop = {
   },
   saveUserDetails: function(){
     //save the user details to the server
-    debugger;
     $.ajax({
       type: "POST",
       url: "http://dewdrop.neyer.me/make-statement",
@@ -140,12 +139,9 @@ var dewDrop = {
     .done(function(data){
       data.objects.forEach(function(object, index, objects){dewDrop.user.supports.push(object.subject.name)});
       dewDrop.user.supports = _.uniq(dewDrop.user.supports);
+      //now that we have the databack from the user, store it in local storage for easy-ish access
+      localStorage.user.supports = JSON.stringify(dewDrop.user.supports);
     });
-    debugger;
-    if (localStorage.user){
-      this.user = JSON.parse(localStorage.user);
-    }
-    //if you get data from remote, go ahead and set that to our user variable
   }
 };
 
