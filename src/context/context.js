@@ -140,8 +140,8 @@ var dewDrop = {
     .done(function(data){
       data.objects.forEach(function(object, index, objects){dewDrop.user.supports.push(object.subject.name)});
       dewDrop.user.supports = _.uniq(dewDrop.user.supports);
-
     });
+    debugger;
     if (localStorage.user){
       this.user = JSON.parse(localStorage.user);
     }
