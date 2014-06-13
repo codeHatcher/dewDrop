@@ -10,6 +10,8 @@ var dewDrop = {
     this.createContexMenu();
     this.getTemplate();
     this.listenEvents();
+    //get the facebookid of the extension user
+    this.user.ownId = this.getMyId();
     //this.modal();
   },
   listenEvents: function(){
@@ -86,7 +88,7 @@ var dewDrop = {
   },
   getMyId: function(){
     //function gets the id of the logged in user
-    return this.user.ownId;
+    return JSON.parse($('.fbxWelcomeBoxName').attr('data-gt')).bmid;
   },
   trustUser: function(event){
     this.user.supports = _.union(this.user.supports, this.user.personInQuestion.facebookId);
@@ -111,7 +113,7 @@ var dewDrop = {
       dataType: "json",
       async: true,
       data: JSON.stringify({
-        "author_name" : dewDrop.user.ownId,
+        "author_name" : dewDrop.user.ownId.toString(),
         "author_network" : "facebook",
         "subject_name" : dewDrop.user.personInQuestion.facebookId,
         "subject_network" : "facebook",
