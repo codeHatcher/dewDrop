@@ -111,9 +111,9 @@ var dewDrop = {
       dataType: "json",
       async: true,
       data: JSON.stringify({
-        "author_name" : "21405334",
+        "author_name" : dewDrop.user.ownId,
         "author_network" : "facebook",
-        "subject_name" : "28701031",
+        "subject_name" : dewDrop.user.personInQuestion.facebookId,
         "subject_network" : "facebook",
         "content" : "trust"
       }),
