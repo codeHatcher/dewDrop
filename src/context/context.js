@@ -103,7 +103,28 @@ var dewDrop = {
   },
   saveUserDetails: function(){
     //save the user details to the server
-    //save the user details in local storage
+    debugger;
+    $.ajax({
+      type: "POST",
+      url: "http://dewdrop.neyer.me/make-statement",
+      contentType: "application/json",
+      dataType: "json",
+      async: true,
+      data: JSON.stringify({
+        "author_name" : "21405334",
+        "author_network" : "facebook",
+        "subject_name" : "28701031",
+        "subject_network" : "facebook",
+        "content" : "trust"
+      }),
+      success: function(data){
+
+      },
+      failure: function(err){
+
+      }
+    });
+    //save the user details in local storage so we only have to go to the server once
     localStorage.user = JSON.stringify(this.user);
   },
   getUserDetails: function(){
