@@ -137,9 +137,16 @@ var dewDrop = {
 
     })
     .done(function(data){
-      data.objects.forEach(function(object, index, objects){dewDrop.user.supports.push(object.subject.name)});
+      data.objects.forEach(function(object, index, objects){
+        if (object.content === "trust"){
+          //only if the content is trust, we add that to our trusted users
+          dewDrop.user.supports.push(object.subject.name);
+        }
+      });
       dewDrop.user.supports = _.uniq(dewDrop.user.supports);
       //now that we have the databack from the user, store it in local storage for easy-ish access
+      localStorage.user = {};
+      localStorage.user.supports = [];
       localStorage.user.supports = JSON.stringify(dewDrop.user.supports);
     });
   }
