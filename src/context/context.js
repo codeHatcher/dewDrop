@@ -1,7 +1,7 @@
 
 var dewDrop = {
   template: {}, //keep the template here
-  user:{supports:[], supporters:[], personInQuestion:{}}, //whats the point of using loose type if I am doing it here ARGGG
+  user:{supports:[], distrusts: [], supporters:[], personInQuestion:{}}, //whats the point of using loose type if I am doing it here ARGGG
   init: function(){
     //bind functions to keep proper context
     this.trustUser = _.bind(this.trustUser, this);
@@ -133,7 +133,24 @@ var dewDrop = {
     //mockup the data for now
     //try to get data from remote server
     //TODO, insert api hook here
-    var jqxhr = $.getJSON("http://dewdrop.neyer.me/api/v1/statement/?format=json&author__name=21405334&author__network__name=facebook&content=trust&subject__network__name=facebook", function(){
+    debugger;
+    var distrustXHR = $.getJSON("http://dewdrop.neyer.me/api/v1/statement/?format=json&author__name=" + this.getMyId() + "&author__network__name=facebook&content=distrust&subject__network__name=facebook", function(){
+
+    })
+    .done(function(data){
+      data.objects.forEach(function(object, index, objects){
+        if (object.content === "distrust"){
+          //only if the content is trust, we add that to our trusted users
+          dewDrop.user.distrusts.push(object.subject.name);
+        }
+      });
+      dewDrop.user.distrusts = _.uniq(dewDrop.user.distrusts);
+      //now that we have the databack from the user, store it in local storage for easy-ish access
+      localStorage.user = {};
+      localStorage.user.distrusts = [];
+      localStorage.user.distrusts = JSON.stringify(dewDrop.user.distrusts);
+    });
+    var trustXHR = $.getJSON("http://dewdrop.neyer.me/api/v1/statement/?format=json&author__name=" + this.getMyId() + "&author__network__name=facebook&content=trust&subject__network__name=facebook", function(){
 
     })
     .done(function(data){
