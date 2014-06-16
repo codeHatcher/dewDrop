@@ -93,17 +93,17 @@ var dewDrop = {
   trustUser: function(event){
     this.user.supports = _.union(this.user.supports, this.user.personInQuestion.facebookId);
     //save the id as trusted (testing)
-    this.saveUserDetails();
+    this.saveUserDetails({content: "trust"});
   },
   distrustUser: function(event){
     this.user.supports = _.without(this.user.supports, this.user.personInQuestion.facebookId);
-    this.saveUserDetails();
+    this.saveUserDetails({content: "distrust"});
   },
   checkTrust: function(userId){
     //go through our list of users we support and see if there is a match
     return _.contains(this.user.supports, this.user.personInQuestion.facebookId);
   },
-  saveUserDetails: function(){
+  saveUserDetails: function(options){
     //save the user details to the server
     $.ajax({
       type: "POST",
@@ -116,7 +116,7 @@ var dewDrop = {
         "author_network" : "facebook",
         "subject_name" : dewDrop.user.personInQuestion.facebookId,
         "subject_network" : "facebook",
-        "content" : "trust"
+        "content" : options.content
       }),
       success: function(data){
 
