@@ -101,6 +101,7 @@ var dewDrop = {
   },
   checkTrust: function(userId){
     //go through our list of users we support and see if there is a match
+    debugger;
     return _.contains(this.user.supports, this.user.personInQuestion.facebookId);
   },
   saveUserDetails: function(options){
@@ -133,18 +134,14 @@ var dewDrop = {
     //mockup the data for now
     //try to get data from remote server
     //TODO, insert api hook here
-    debugger;
     var distrustXHR = $.getJSON("http://dewdrop.neyer.me/api/v1/statement/?format=json&author__name=" + this.getMyId() + "&author__network__name=facebook&content=distrust&subject__network__name=facebook", function(){
 
     })
     .done(function(data){
-      data.objects.forEach(function(object, index, objects){
-        if (object.content === "distrust"){
-          //only if the content is trust, we add that to our trusted users
-          dewDrop.user.distrusts.push(object.subject.name);
-        }
+      dewDrop.user.distrusts = _.uniq(data.objects, false, function(statement, index, statements){
+        //return only the unique subjects since this user will be the author of everything
+        return statement.subject.name;
       });
-      dewDrop.user.distrusts = _.uniq(dewDrop.user.distrusts);
       //now that we have the databack from the user, store it in local storage for easy-ish access
       localStorage.user = {};
       localStorage.user.distrusts = [];
@@ -154,13 +151,10 @@ var dewDrop = {
 
     })
     .done(function(data){
-      data.objects.forEach(function(object, index, objects){
-        if (object.content === "trust"){
-          //only if the content is trust, we add that to our trusted users
-          dewDrop.user.supports.push(object.subject.name);
-        }
+      dewDrop.user.supports = _.uniq(data.objects, false, function(statement, index, statements){
+        //return only the unique subjects since this user will be the author of everything
+        return statement.subject.name;
       });
-      dewDrop.user.supports = _.uniq(dewDrop.user.supports);
       //now that we have the databack from the user, store it in local storage for easy-ish access
       localStorage.user = {};
       localStorage.user.supports = [];
