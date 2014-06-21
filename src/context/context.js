@@ -151,10 +151,12 @@ var dewDrop = {
 
     })
     .done(function(data){
-      dewDrop.user.supports = _.uniq(data.objects, false, function(statement, index, statements){
+      var sorted = _.sortBy(data.objects, function(statement){return 0-statement.timestamp;});
+      dewDrop.user.supports = _.uniq(sorted, false, function(statement, index, statements){
         //return only the unique subjects since this user will be the author of everything
         return statement.subject.name;
       });
+      debugger;
       //now that we have the databack from the user, store it in local storage for easy-ish access
       localStorage.user = {};
       localStorage.user.supports = [];
